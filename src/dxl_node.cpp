@@ -12,8 +12,9 @@ ros::Subscriber subscriptor;
 
 void funcionCallback(const raw_dynamixel::dxl_word::ConstPtr& msg)
 {
-    ROS_INFO("Mensaje PU recibido\n");
+    ROS_INFO("New command\n");
     cout << "   id: " << (int)msg->id << endl;
+    dxl_write_word( (int)msg->id, (int)msg->address, (int)msg->value);
 }
 
 int main(int argc, char **argv)
@@ -24,16 +25,6 @@ int main(int argc, char **argv)
 
     if(dxl_initialize(0,1)) cout<<"bien"; else cout<<"mal";
 
-    subscriptor = nodo.subscribe("dxl_topic", 0, funcionCallback);
-
-
-    
-    ros::Duration seconds_sleep(3);
-
-
-    while(ros::ok())
-    {
-        ros::spinOnce();
-        seconds_sleep.sleep();
-    }
+    subscriptor = nodo.subscribe("dxl_topic", 0, funcionCallback);    
+    while(ros::ok()) ros::spinOnce();
 }

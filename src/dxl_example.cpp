@@ -11,22 +11,28 @@ int main(int argc, char **argv)
     ROS_INFO("Dynamixel servos handling example");
     ros::Publisher publicador = nodo.advertise<raw_dynamixel::dxl_word>("dxl_topic", 0);
 
-    while(ros::ok())
-    {
-        raw_dynamixel::dxl_word mensaje;
+    raw_dynamixel::dxl_word mensaje;
 
-        int i;
-
-        ROS_INFO("Enter ID: ");
-        scanf ("%d",&i);
-
-
-        mensaje.id=i;
-        mensaje.address=0;
-        mensaje.value=0;
+    if (argc==4){
+        mensaje.id=atoi(argv[1]);
+        mensaje.address=atoi(argv[2]);
+        mensaje.value=atoi(argv[3]);
 
         publicador.publish(mensaje);
+    }
+    else{
+        ROS_INFO("Note: You can execute this example with the usage ./dxl_example <ID> <ADDRESS> <VALUE> ");
+    }
+    while(ros::ok())
+    {
+        ROS_INFO("Enter ID: ");
+        cin>>mensaje.id;
+        ROS_INFO("Enter ADDRESS: ");
+        cin>>mensaje.address;
+        ROS_INFO("Enter VALUE: ");
+        cin>>mensaje.value;
 
+        publicador.publish(mensaje);
         ROS_INFO("Done!");
         ros::spinOnce();
     }

@@ -1,5 +1,5 @@
 #include "ros/ros.h"
-#include "raw_dynamixel/dxl_word.h"
+#include "raw_dynamixel/dxl_command.h"
 #include <stdio.h>
 
 using namespace std;
@@ -9,9 +9,9 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "dxl_example");
     ros::NodeHandle nodo;
     ROS_INFO("Dynamixel servos handling example");
-    ros::Publisher publicador = nodo.advertise<raw_dynamixel::dxl_word>("dxl_topic", 0);
+    ros::Publisher publicador = nodo.advertise<raw_dynamixel::dxl_command>("dxl_command_controller", 0);
 
-    raw_dynamixel::dxl_word mensaje;
+    raw_dynamixel::dxl_command mensaje;
 
     if (argc==4){
         mensaje.id=atoi(argv[1]);

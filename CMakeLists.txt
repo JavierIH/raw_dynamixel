@@ -47,16 +47,16 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
    FILES
-   dxl_word.msg
+   dxl_command.msg
 #   Message2.msg
 )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
+add_service_files(
+   FILES
+   dxl_state.srv
 #   Service2.srv
-# )
+ )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -106,6 +106,7 @@ add_library(dynamixel src/dynamixel.c) #add_library(dynamixel src/${PROJECT_NAME
 ## Declare a cpp executable
 add_executable(dxl_example src/dxl_example.cpp)
 add_executable(dxl_node src/dxl_node.cpp)
+add_executable(dxl_controller src/dxl_controller.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -119,6 +120,10 @@ target_link_libraries(dxl_node dynamixel dxl_hal
    ${catkin_LIBRARIES}
 )
 target_link_libraries(dxl_example dynamixel dxl_hal
+   ${catkin_LIBRARIES}
+)
+
+target_link_libraries(dxl_controller dynamixel dxl_hal
    ${catkin_LIBRARIES}
 )
 

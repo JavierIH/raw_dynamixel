@@ -10,9 +10,9 @@ bool dxl_st(raw_dynamixel::dxl_state::Request &req, raw_dynamixel::dxl_state::Re
 	res.value=dxl_read_word(req.id, req.address);	
 
 	ROS_INFO("Dynamixel motor state:");
-	ROS_INFO("ID: ", (int)req.id);
-	ROS_INFO("Address: ", (int)req.address);
-	ROS_INFO("Value: ", (int)res.value);
+	ROS_INFO("ID: %d", (int)req.id);
+	ROS_INFO("Address: %d", (int)req.address);
+	ROS_INFO("Value: %d", (int)res.value);
 
 	return 1;
 }
@@ -38,7 +38,7 @@ int main(int argc, char **argv){
 	ros::ServiceServer service = node.advertiseService("dxl_state_controller",dxl_st);
 	ros::Subscriber subscriber = node.subscribe("dxl_command_controller", 0, dxl_cmd);    
 	
-	while(ros::ok()) ros::spinOnce();
+	ros::spin();
 
 	return 0;
 }

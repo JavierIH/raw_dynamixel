@@ -17,12 +17,10 @@ int main(int argc, char **argv)
 
 	ros::ServiceClient state_client = nodo.serviceClient<raw_dynamixel::dxl_state>("dxl_state_controller");
 	raw_dynamixel::dxl_state moving;
-		moving.request.id=1;
-		moving.request.address=46;
+	moving.request.address=46;
 
 	raw_dynamixel::dxl_state present_position;
-		present_position.request.id=1;
-		present_position.request.address=36;
+	present_position.request.address=36;
 
 
 	if (argc==4){
@@ -36,9 +34,15 @@ int main(int argc, char **argv)
 	        ROS_INFO("Note: You can execute this example with the usage ./dxl_example <ID> <ADDRESS> <VALUE> ");
 	}
 
+
+	int id;
+
 	while(ros::ok()){
 	        ROS_INFO("Enter ID / Address / Value: ");
-        	cin>>command.id;
+        	cin>>id;
+		command.id=id;
+		moving.request.id=id;
+		present_position.request.id=id;
        		cin>>command.address;
 		cin>>command.value;
 
@@ -48,7 +52,7 @@ int main(int argc, char **argv)
 				if(state_client.call(present_position)) ROS_INFO("Present position: %d", (int)present_position.response.value);					
 				else ROS_INFO("Call to -present_position- failed");
 				state_client.call(moving);
-				break;////////
+				ros::Duration(0.2).sleep();
 			}			
 		}
 		else ROS_INFO("Call to -moving- failed");

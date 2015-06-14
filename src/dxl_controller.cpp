@@ -7,7 +7,7 @@
 
 bool dxl_st(raw_dynamixel::dxl_state::Request &req, raw_dynamixel::dxl_state::Response &res){
 	
-	dxl_read_word(req.id, req.address);	
+	res.value=dxl_read_word(req.id, req.address);	
 
 	ROS_INFO("Dynamixel motor state:");
 	ROS_INFO("ID: ", (int)req.id);

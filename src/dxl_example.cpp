@@ -43,17 +43,15 @@ int main(int argc, char **argv)
 		cin>>command.value;
 
 	        publicador.publish(command);
-    		/*if (state_client.call(moving)){
+    		if (state_client.call(moving)){
 			while((int)moving.response.value){
-				if(state_client.call(present_position)){
-					
-				}
+				if(state_client.call(present_position)) ROS_INFO("Present position: %d", (int)present_position.response.value);					
 				else ROS_INFO("Call to -present_position- failed");
 				state_client.call(moving);
+				break;////////
 			}			
 		}
-		else ROS_INFO("Call to -moving- failed")
+		else ROS_INFO("Call to -moving- failed");
 	        ROS_INFO("Done!");
-	        ros::spinOnce();*/
 	}
 }

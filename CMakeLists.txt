@@ -105,7 +105,6 @@ add_library(dynamixel src/dynamixel.c) #add_library(dynamixel src/${PROJECT_NAME
 
 ## Declare a cpp executable
 add_executable(dxl_example src/dxl_example.cpp)
-add_executable(dxl_node src/dxl_node.cpp)
 add_executable(dxl_controller src/dxl_controller.cpp)
 
 ## Add cmake target dependencies of the executable/library
@@ -116,9 +115,7 @@ add_executable(dxl_controller src/dxl_controller.cpp)
 target_link_libraries(dynamixel dxl_hal
    ${catkin_LIBRARIES}
 )
-target_link_libraries(dxl_node dynamixel dxl_hal
-   ${catkin_LIBRARIES}
-)
+
 target_link_libraries(dxl_example dynamixel dxl_hal
    ${catkin_LIBRARIES}
 )

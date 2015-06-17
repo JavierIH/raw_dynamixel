@@ -107,6 +107,10 @@ add_library(dynamixel src/dynamixel.c) #add_library(dynamixel src/${PROJECT_NAME
 add_executable(dxl_example src/dxl_example.cpp)
 add_executable(dxl_controller src/dxl_controller.cpp)
 
+add_executable(test_pos_vel src/test/test_pos_vel.cpp)
+add_executable(test_move src/test/test_move.cpp)
+add_executable(test_load src/test/test_load.cpp)
+
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(raw_dynamixel_node raw_dynamixel_generate_messages_cpp)
@@ -121,6 +125,18 @@ target_link_libraries(dxl_example dynamixel dxl_hal
 )
 
 target_link_libraries(dxl_controller dynamixel dxl_hal
+   ${catkin_LIBRARIES}
+)
+
+target_link_libraries(test_pos_vel 
+   ${catkin_LIBRARIES}
+)
+
+target_link_libraries(test_move
+   ${catkin_LIBRARIES}
+)
+
+target_link_libraries(test_load
    ${catkin_LIBRARIES}
 )
 
